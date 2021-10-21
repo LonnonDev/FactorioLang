@@ -1,6 +1,6 @@
 require("main")
 
-local basic = decider("E", ">", "B", {})
+local basic = decider("E", ">", "B", "C", {})
 
 
 generate()

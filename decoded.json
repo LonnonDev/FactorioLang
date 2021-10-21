@@ -1,1 +1,43 @@
-{"blueprint":{"icons":[{"signal":{"type":"item","name":"decider-combinator"},"index":1}],"entities":[{"entity_number":1,"name":"decider-combinator","position":{"x":31.5,"y":-5},"control_behavior":{"decider_conditions":{"first_signal":{"type":"item","name":"logistic-chest-passive-provider"},"second_signal":{"type":"virtual","name":"signal-E"},"comparator":"<","copy_count_from_input":true}}}],"item":"blueprint","version":281479274430464}}
+{
+    "blueprint": {
+        "icons": [
+            {
+                "signal": {
+                    "type": "item",
+                    "name": "decider-combinator"
+                },
+                "index": 1
+            }
+        ],
+        "entities": [
+            {
+                "entity_number": 1,
+                "name": "decider-combinator",
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "control_behavior": {
+                    "decider_conditions": {
+                        "first_signal": {
+                            "type": "virtual",
+                            "name": "signal-E"
+                        },
+                        "second_signal": {
+                            "type": "virtual",
+                            "name": "signal-B"
+                        },
+                        "comparator": ">",
+                        "output_signal": {
+                            "type": "virtual",
+                            "name": "signal-C"
+                        },
+                        "copy_count_from_input": true
+                    }
+                }
+            }
+        ],
+        "item": "blueprint",
+        "version": 281479274430464
+    }
+}
