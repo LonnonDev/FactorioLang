@@ -30,22 +30,27 @@ function generate()
     encode()
 end
 
-function decider(first, comparator, second, output, connections)
+function decider(statement, output, connections)
     local circuitslen = 0
     for _ in pairs(circuits) do circuitslen = circuitslen + 1 end
 
-    local root = ""
-    local compare = ""
+    local splitstatement = {}
+    for i in string.gmatch(statement, "%S+") do
+        table.insert(splitstatement, i)
+    end
+    local first = splitstatement[1]
+    local comparator = splitstatement[2]
+    local second = splitstatement[3]
     local outputsignal = ""
     if type(first) == "number" then 
-        root = first
+        first = first
     elseif type(first) == "string" then
-        root = "{\"type\": \"virtual\",\"name\": \"signal-" .. first .. "\"},"
+        first = "{\"type\": \"virtual\",\"name\": \"signal-" .. first .. "\"},"
     end
     if type(second) == "number" then 
-        compare = second
+        second = second
     elseif type(second) == "string" then
-        compare = "{\"type\": \"virtual\",\"name\": \"signal-" .. second .. "\"},"
+        second = "{\"type\": \"virtual\",\"name\": \"signal-" .. second .. "\"},"
     end
     if type(output) == "number" then 
         outputsignal = output
@@ -53,9 +58,9 @@ function decider(first, comparator, second, output, connections)
         outputsignal = "{\"type\": \"virtual\",\"name\": \"signal-" .. output .. "\"},"
     end
     if circuitslen == 0 then
-        generatedjson = generatedjson .. "{\"entity_number\":" .. circuitslen + 1 .. ",\"name\": \"decider-combinator\",\"position\": { \"x\": " .. position[1] .. ", \"y\": " .. position[2] .. "},\"control_behavior\": {\"decider_conditions\": {\"first_signal\": " .. root .. "\"second_signal\": " .. compare .. "\"comparator\": \"" .. comparator .. "\",\"output_signal\":" .. outputsignal .. "\"copy_count_from_input\": true}}}" 
+        generatedjson = generatedjson .. "{\"entity_number\":" .. circuitslen + 1 .. ",\"name\": \"decider-combinator\",\"position\": { \"x\": " .. position[1] .. ", \"y\": " .. position[2] .. "},\"control_behavior\": {\"decider_conditions\": {\"first_signal\": " .. first .. "\"second_signal\": " .. second .. "\"comparator\": \"" .. comparator .. "\",\"output_signal\":" .. outputsignal .. "\"copy_count_from_input\": true}}}" 
     else
-        generatedjson = generatedjson .. "," .. "{\"entity_number\":" .. circuitslen + 1 .. ",\"name\": \"decider-combinator\",\"position\": { \"x\": " .. position[1] .. ", \"y\": " .. position[2] .. "},\"control_behavior\": {\"decider_conditions\": {\"first_signal\": " .. root .. "\"second_signal\": " .. compare .. "\"comparator\": \"" .. comparator .. "\",\"output_signal\":" .. outputsignal .. "\"copy_count_from_input\": true}}}" 
+        generatedjson = generatedjson .. "," .. "{\"entity_number\":" .. circuitslen + 1 .. ",\"name\": \"decider-combinator\",\"position\": { \"x\": " .. position[1] .. ", \"y\": " .. position[2] .. "},\"control_behavior\": {\"decider_conditions\": {\"first_signal\": " .. first .. "\"second_signal\": " .. second .. "\"comparator\": \"" .. comparator .. "\",\"output_signal\":" .. outputsignal .. "\"copy_count_from_input\": true}}}" 
     end
     return {1}
 end
